@@ -1,9 +1,14 @@
+import os
 import time
 from celery import Celery
 
-app = Celery('tasks', broker='pyamqp://xxx:xxx@localhost//')
+RABBITMQ_USER = os.getenv('RABBITMQ_USER', 'xxx')
+RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASS', 'xxx')
+RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'localhost')
 
-@app.task
+celery_app = Celery('tasks', broker=f'pyamqp://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@{RABBITMQ_HOST}//')
+
+@celery_app.task
 def process_file(t):
     print(f'Receiving task, sleeping for {t} seconds')
     time.sleep(t)

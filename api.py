@@ -1,12 +1,12 @@
 import random
 from flask import Flask
 
-from worker import process_file
+from worker import celery_app, process_file, RABBITMQ_PASSWORD, RABBITMQ_USER, RABBITMQ_HOST
 
 
-app = Flask(__name__)
+flask_app = Flask(__name__)
 
-@app.route('/')
+@flask_app.route('/')
 def root():
     n = random.randrange(1, 10)
     process_file.delay(n)
@@ -14,4 +14,4 @@ def root():
 
 
 if __name__ == "__main__":
-    app.run()
+    flask_app.run()
