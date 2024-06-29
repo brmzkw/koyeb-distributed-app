@@ -30,6 +30,9 @@ pip install -vr requirements.txt
 
 ```bash
 source ./venv/bin/activate
+export RABBITMQ_USER=xxx
+export RABBITMQ_PASS=xxx
+export RABBITMQ_HOST=localhost
 FLASK_DEBUG=t python api.py
 ```
 
@@ -37,5 +40,8 @@ FLASK_DEBUG=t python api.py
 
 ```bash
 source ./venv/bin/activate
+export RABBITMQ_USER=xxx
+export RABBITMQ_PASS=xxx
+export RABBITMQ_HOST=localhost
 celery -A worker worker --loglevel=INFO
 ```
