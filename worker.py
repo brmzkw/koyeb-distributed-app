@@ -6,9 +6,6 @@ RABBITMQ_USER = os.getenv('RABBITMQ_USER', 'xxx')
 RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASS', 'xxx')
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'localhost')
 
-print('RabbitMQ user:', RABBITMQ_USER)
-print('RabbitMQ password:', RABBITMQ_PASSWORD)
-print('RabbitMQ host:', RABBITMQ_HOST)
 celery_app = Celery('tasks', broker=f'pyamqp://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@{RABBITMQ_HOST}//')
 
 @celery_app.task
