@@ -1,15 +1,15 @@
 ## Deploy on Koyeb
 
 ```
-koyeb app create distributed-app-rabbitmq
-koyeb service create distributed-app-rabbitmq/rabbitmq --docker rabbitmq:management --port 15672 --port 5672:tcp --env RABBITMQ_DEFAULT_USER=xxx --env RABBITMQ_DEFAULT_PASS=xxx --route /:15672
+koyeb app create dapp-rabbitmq
+koyeb service create dapp-rabbitmq/rabbitmq --docker rabbitmq:management --port 15672 --port 5672:tcp --env RABBITMQ_DEFAULT_USER=xxx --env RABBITMQ_DEFAULT_PASS=xxx --route /:15672
 
-koyeb app create distributed-app-api
-koyeb service create distributed-app-api/api --git github.com/brmzkw/koyeb-distributed-app --port 8000 --env RABBITMQ_HOST=rabbitmq.distributed-app.koyeb
+koyeb app create dapp-api
+koyeb service create dapp-api/api --git github.com/brmzkw/koyeb-distributed-app --port 8000 --env RABBITMQ_HOST=rabbitmq.rapp-rabbitmq.koyeb
 
-koyeb app create distributed-app-worker
+koyeb app create dapp-worker
 export KOYEB_API_KEY=<xxx>
-koyeb service create distributed-app-worker/worker --git github.com/brmzkw/koyeb-distributed-app --env RABBITMQ_HOST=rabbitmq.distributed-app.koyeb --git-buildpack-run-command 'celery -A worker worker --loglevel=INFO -B -Q high_priority,celery' --type worker --env KOYEB_API_KEY=$KOYEB_API_KEY
+koyeb service create dapp-worker/worker --git github.com/brmzkw/koyeb-distributed-app --env RABBITMQ_HOST=rabbitmq.dapp-rabbitmq.koyeb --git-buildpack-run-command 'celery -A worker worker --loglevel=INFO -B -Q high_priority,celery' --type worker --env KOYEB_API_KEY=$KOYEB_API_KEY
 ```
 
 

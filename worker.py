@@ -12,7 +12,7 @@ RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASS', 'xxx')
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'localhost')
 KOYEB_API_KEY = os.environ.get('KOYEB_API_KEY')
 
-KOYEB_WORKER_APP = os.getenv('KOYEB_WORKER_APP', 'distributed-app-worker')
+KOYEB_WORKER_APP = os.getenv('KOYEB_WORKER_APP', 'dapp-worker')
 KOYEB_WORKER_SERVICE = os.getenv('KOYEB_WORKER_SERVICE', 'worker')
 
 celery_app = Celery('tasks', broker=f'pyamqp://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@{RABBITMQ_HOST}//')
