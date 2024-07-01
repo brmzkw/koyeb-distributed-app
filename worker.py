@@ -93,20 +93,26 @@ def do_service_scale(expected_count):
         if current_count == expected_count:
             print(f'Service already scaled to {expected_count} instances, skipping')
             return
+        elif current_count > expected_count:
+            direction = 'down'
+            new_count = current_count - 1
+        else:
+            direction = 'up'
+            new_count = current_count + 1
 
         for idx, _ in enumerate(deployment.definition.scalings):
-            deployment.definition.scalings[idx].min = 2
-            deployment.definition.scalings[idx].max = 2
+            deployment.definition.scalings[idx].min = new_count
+            deployment.definition.scalings[idx].max = new_count
 
         update_body = UpdateService(definition=deployment.definition, skip_build=True)
         ServicesApi(api_client=api_client).update_service(
             id=services[0].id,
             service=update_body
         )
-        print(f'Scaling service to {expected_count} instances')
+        print(f'Scaling {direction} service to {new_count} instances')
 
 
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     # Executes every 10 seconds
-    sender.add_periodic_task(10.0, scale_koyeb_service.s(), name='Scale Koyeb service')
+    sender.add_periodic_task(60.0, scale_koyeb_service.s(), name='Scale Koyeb service')
