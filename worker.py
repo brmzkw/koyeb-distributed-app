@@ -1,15 +1,19 @@
+import math
 import os
 import time
 from celery import Celery
 from kombu import Exchange, Queue
 import pika
 
-from sdk.openapi_client import ApiClient, Configuration, ServicesApi
+from sdk.openapi_client import ApiClient, Configuration, ServicesApi, AppsApi, DeploymentsApi, UpdateService
 
 RABBITMQ_USER = os.getenv('RABBITMQ_USER', 'xxx')
 RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASS', 'xxx')
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'localhost')
 KOYEB_API_KEY = os.environ.get('KOYEB_API_KEY')
+
+KOYEB_WORKER_APP = os.getenv('KOYEB_WORKER_APP', 'distributed-app')
+KOYEB_WORKER_SERVICE = os.getenv('KOYEB_WORKER_SERVICE', 'worker')
 
 celery_app = Celery('tasks', broker=f'pyamqp://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@{RABBITMQ_HOST}//')
 
@@ -36,12 +40,24 @@ def process_file(t):
 
 @celery_app.task(priority=0)
 def scale_koyeb_service():
+    # Connect to RabbitMQ, and get the number of tasks in the default "celery" queue used to process tasks.
     credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASSWORD)
     connection = pika.BlockingConnection(pika.ConnectionParameters(RABBITMQ_HOST, credentials=credentials))
     channel = connection.channel()
     queue = channel.queue_declare(queue='celery', passive=True)
     ready_tasks = queue.method.message_count
-    print('>>>> READY TASKS=', ready_tasks)
+
+    # Let's assume we want to have maximum 10 tasks in the queue per worker
+    expected_count = math.ceil(ready_tasks / 10)
+
+    # Perform the scaling if needed
+    do_service_scale(expected_count)
+
+
+def do_service_scale(expected_count):
+    # Force to have at least 1 worker
+    if expected_count < 1:
+        expected_count = 1
 
     configuration = Configuration(
         host="https://app.koyeb.com",
@@ -54,8 +70,37 @@ def scale_koyeb_service():
     )
 
     with ApiClient(configuration) as api_client:
-        services = ServicesApi(api_client).list_services()
-        print('>>>>>', services)
+        # Retrieve Koyeb application
+        apps = AppsApi(api_client).list_apps(name=KOYEB_WORKER_APP).apps
+        if len(apps) != 1:
+            raise ValueError(f'Expected 1 app with name {KOYEB_WORKER_APP}, got {len(apps)}')
+
+        # Retrieve Koyeb service
+        services = ServicesApi(api_client).list_services(app_id=apps[0].id, name=KOYEB_WORKER_SERVICE).services
+        if len(services) != 1:
+            raise ValueError(f'Expected 1 service with name {KOYEB_WORKER_SERVICE}, got {len(services)}')
+
+        # Get the current deployment
+        latest_deployment_id = services[0].latest_deployment_id
+        deployment = DeploymentsApi(api_client).get_deployment(id=latest_deployment_id).deployment
+
+        # Assuming we have only one scaling group, and all the scaling groups have the same min/max values
+        current_count = deployment.definition.scalings[0].min
+
+        if current_count == expected_count:
+            print(f'Service already scaled to {expected_count} instances, skipping')
+            return
+
+        for idx, _ in enumerate(deployment.definition.scalings):
+            deployment.definition.scalings[idx].min = 2
+            deployment.definition.scalings[idx].max = 2
+
+        update_body = UpdateService(definition=deployment.definition, skip_build=True)
+        ServicesApi(api_client=api_client).update_service(
+            id=services[0].id,
+            service=update_body
+        )
+        print(f'Scaled service to {expected_count} instances')
 
 
 @celery_app.on_after_configure.connect

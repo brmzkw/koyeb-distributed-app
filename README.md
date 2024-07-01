@@ -3,7 +3,7 @@
 ```
 koyeb app create distributed-app
 
-koyeb service create distributed-app/rabbitmq --docker rabbitmq:management --port 15672 --port 5672:tcp --env RABBITMQ_DEFAULT_USER=xxx --env RABBITMQ_DEFAULT_PASS=xxx --route /:15672
+koyeb service create distributed-app/rabbitmq --docker rabbitmq:management --port 15672 --port 5672:tcp --env RABBITMQ_DEFAULT_USER=xxx --env RABBITMQ_DEFAULT_PASS=xxx --route /rabbitmq:15672
 
 koyeb service create distributed-app/api --git github.com/brmzkw/koyeb-distributed-app --port 8000 --env RABBITMQ_HOST=rabbitmq.distributed-app.koyeb
 
