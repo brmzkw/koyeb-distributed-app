@@ -40,6 +40,8 @@ def process_file(t):
 
 @celery_app.task(priority=0)
 def scale_koyeb_service():
+    print('Checking if we need to scale the service')
+
     # Connect to RabbitMQ, and get the number of tasks in the default "celery" queue used to process tasks.
     credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASSWORD)
     connection = pika.BlockingConnection(pika.ConnectionParameters(RABBITMQ_HOST, credentials=credentials))
@@ -49,6 +51,7 @@ def scale_koyeb_service():
 
     # Let's assume we want to have maximum 10 tasks in the queue per worker
     expected_count = math.ceil(ready_tasks / 10)
+    print(f'Queue has {ready_tasks} tasks, expected workers count: {expected_count}')
 
     # Perform the scaling if needed
     do_service_scale(expected_count)
@@ -100,10 +103,10 @@ def do_service_scale(expected_count):
             id=services[0].id,
             service=update_body
         )
-        print(f'Scaled service to {expected_count} instances')
+        print(f'Scaling service to {expected_count} instances')
 
 
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    # Executes every 3 seconds
+    # Executes every 10 seconds
     sender.add_periodic_task(10.0, scale_koyeb_service.s(), name='Scale Koyeb service')
