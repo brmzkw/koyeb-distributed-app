@@ -33,7 +33,7 @@ class RegionalDeploymentListItem(BaseModel):
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
     region: Optional[StrictStr] = None
-    status: Optional[RegionalDeploymentStatus] = RegionalDeploymentStatus.PENDING
+    status: Optional[RegionalDeploymentStatus] = None
     messages: Optional[List[StrictStr]] = None
     definition: Optional[RegionalDeploymentDefinition] = None
     use_kuma_v2: Optional[StrictBool] = None
@@ -98,7 +98,7 @@ class RegionalDeploymentListItem(BaseModel):
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
             "region": obj.get("region"),
-            "status": obj.get("status") if obj.get("status") is not None else RegionalDeploymentStatus.PENDING,
+            "status": obj.get("status"),
             "messages": obj.get("messages"),
             "definition": RegionalDeploymentDefinition.from_dict(obj["definition"]) if obj.get("definition") is not None else None,
             "use_kuma_v2": obj.get("use_kuma_v2"),

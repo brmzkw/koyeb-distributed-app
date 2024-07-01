@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
-**type** | [**CredentialType**](CredentialType.md) |  | [optional] [default to CredentialType.INVALID]
+**type** | [**CredentialType**](CredentialType.md) |  | [optional] 
 **organization_id** | **str** |  | [optional] 
 
 ## Example

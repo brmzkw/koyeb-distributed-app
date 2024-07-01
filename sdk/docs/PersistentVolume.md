@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **read_only** | **bool** |  | [optional] 
 **max_size** | **int** |  | [optional] 
 **cur_size** | **int** |  | [optional] 
-**status** | [**PersistentVolumeStatus**](PersistentVolumeStatus.md) |  | [optional] [default to PersistentVolumeStatus.INVALID]
-**backing_store** | [**PersistentVolumeBackingStore**](PersistentVolumeBackingStore.md) |  | [optional] [default to PersistentVolumeBackingStore.INVALID]
+**status** | [**PersistentVolumeStatus**](PersistentVolumeStatus.md) |  | [optional] 
+**backing_store** | [**PersistentVolumeBackingStore**](PersistentVolumeBackingStore.md) |  | [optional] 
 
 ## Example
 

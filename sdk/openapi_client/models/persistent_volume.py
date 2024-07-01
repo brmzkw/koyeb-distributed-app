@@ -40,8 +40,8 @@ class PersistentVolume(BaseModel):
     read_only: Optional[StrictBool] = None
     max_size: Optional[StrictInt] = None
     cur_size: Optional[StrictInt] = None
-    status: Optional[PersistentVolumeStatus] = PersistentVolumeStatus.INVALID
-    backing_store: Optional[PersistentVolumeBackingStore] = PersistentVolumeBackingStore.INVALID
+    status: Optional[PersistentVolumeStatus] = None
+    backing_store: Optional[PersistentVolumeBackingStore] = None
     __properties: ClassVar[List[str]] = ["id", "name", "created_at", "updated_at", "deleted_at", "organization_id", "service_id", "region", "read_only", "max_size", "cur_size", "status", "backing_store"]
 
     model_config = ConfigDict(
@@ -106,8 +106,8 @@ class PersistentVolume(BaseModel):
             "read_only": obj.get("read_only"),
             "max_size": obj.get("max_size"),
             "cur_size": obj.get("cur_size"),
-            "status": obj.get("status") if obj.get("status") is not None else PersistentVolumeStatus.INVALID,
-            "backing_store": obj.get("backing_store") if obj.get("backing_store") is not None else PersistentVolumeBackingStore.INVALID
+            "status": obj.get("status"),
+            "backing_store": obj.get("backing_store")
         })
         return _obj
 

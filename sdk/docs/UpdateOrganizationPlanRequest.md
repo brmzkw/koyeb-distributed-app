@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan** | [**Plan**](Plan.md) |  | [optional] [default to Plan.HOBBY]
+**plan** | [**Plan**](Plan.md) |  | [optional] 
 
 ## Example
 

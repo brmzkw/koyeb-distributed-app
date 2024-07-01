@@ -29,7 +29,7 @@ class VerifyDockerImageReply(BaseModel):
     """ # noqa: E501
     success: Optional[StrictBool] = None
     reason: Optional[StrictStr] = None
-    code: Optional[VerifyDockerImageReplyErrCode] = VerifyDockerImageReplyErrCode.UNKNOWN
+    code: Optional[VerifyDockerImageReplyErrCode] = None
     __properties: ClassVar[List[str]] = ["success", "reason", "code"]
 
     model_config = ConfigDict(
@@ -85,7 +85,7 @@ class VerifyDockerImageReply(BaseModel):
         _obj = cls.model_validate({
             "success": obj.get("success"),
             "reason": obj.get("reason"),
-            "code": obj.get("code") if obj.get("code") is not None else VerifyDockerImageReplyErrCode.UNKNOWN
+            "code": obj.get("code")
         })
         return _obj
 

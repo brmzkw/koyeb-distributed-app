@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | [optional] 
-**type** | [**DomainType**](DomainType.md) |  | [optional] [default to DomainType.AUTOASSIGNED]
+**type** | [**DomainType**](DomainType.md) |  | [optional] 
 **app_id** | **str** |  | [optional] 
 
 ## Example

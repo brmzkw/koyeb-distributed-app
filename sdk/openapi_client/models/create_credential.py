@@ -29,7 +29,7 @@ class CreateCredential(BaseModel):
     """ # noqa: E501
     name: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
-    type: Optional[CredentialType] = CredentialType.INVALID
+    type: Optional[CredentialType] = None
     organization_id: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["name", "description", "type", "organization_id"]
 
@@ -86,7 +86,7 @@ class CreateCredential(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "description": obj.get("description"),
-            "type": obj.get("type") if obj.get("type") is not None else CredentialType.INVALID,
+            "type": obj.get("type"),
             "organization_id": obj.get("organization_id")
         })
         return _obj

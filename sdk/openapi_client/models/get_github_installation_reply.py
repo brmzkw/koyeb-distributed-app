@@ -33,10 +33,10 @@ class GetGithubInstallationReply(BaseModel):
     installation_url: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
     avatar_url: Optional[StrictStr] = None
-    status: Optional[KgitproxyGithubInstallationStatus] = KgitproxyGithubInstallationStatus.INVALID
+    status: Optional[KgitproxyGithubInstallationStatus] = None
     installed_at: Optional[datetime] = None
     suspended_at: Optional[datetime] = None
-    indexing_status: Optional[KgitproxyIndexingStatus] = KgitproxyIndexingStatus.INVALID_INDEXING_STATUS
+    indexing_status: Optional[KgitproxyIndexingStatus] = None
     indexed_repositories: Optional[StrictInt] = None
     total_repositories: Optional[StrictInt] = None
     __properties: ClassVar[List[str]] = ["installation_id", "installation_url", "name", "avatar_url", "status", "installed_at", "suspended_at", "indexing_status", "indexed_repositories", "total_repositories"]
@@ -96,10 +96,10 @@ class GetGithubInstallationReply(BaseModel):
             "installation_url": obj.get("installation_url"),
             "name": obj.get("name"),
             "avatar_url": obj.get("avatar_url"),
-            "status": obj.get("status") if obj.get("status") is not None else KgitproxyGithubInstallationStatus.INVALID,
+            "status": obj.get("status"),
             "installed_at": obj.get("installed_at"),
             "suspended_at": obj.get("suspended_at"),
-            "indexing_status": obj.get("indexing_status") if obj.get("indexing_status") is not None else KgitproxyIndexingStatus.INVALID_INDEXING_STATUS,
+            "indexing_status": obj.get("indexing_status"),
             "indexed_repositories": obj.get("indexed_repositories"),
             "total_repositories": obj.get("total_repositories")
         })

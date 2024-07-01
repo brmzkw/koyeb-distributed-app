@@ -32,12 +32,12 @@ class ServiceListItem(BaseModel):
     """ # noqa: E501
     id: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
-    type: Optional[ServiceType] = ServiceType.INVALID_TYPE
+    type: Optional[ServiceType] = None
     organization_id: Optional[StrictStr] = None
     app_id: Optional[StrictStr] = None
     updated_at: Optional[datetime] = None
     created_at: Optional[datetime] = None
-    status: Optional[ServiceStatus] = ServiceStatus.STARTING
+    status: Optional[ServiceStatus] = None
     messages: Optional[List[StrictStr]] = None
     version: Optional[StrictStr] = None
     state: Optional[ServiceState] = None
@@ -101,12 +101,12 @@ class ServiceListItem(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
-            "type": obj.get("type") if obj.get("type") is not None else ServiceType.INVALID_TYPE,
+            "type": obj.get("type"),
             "organization_id": obj.get("organization_id"),
             "app_id": obj.get("app_id"),
             "updated_at": obj.get("updated_at"),
             "created_at": obj.get("created_at"),
-            "status": obj.get("status") if obj.get("status") is not None else ServiceStatus.STARTING,
+            "status": obj.get("status"),
             "messages": obj.get("messages"),
             "version": obj.get("version"),
             "state": ServiceState.from_dict(obj["state"]) if obj.get("state") is not None else None,

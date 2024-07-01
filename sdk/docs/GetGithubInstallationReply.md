@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **installation_url** | **str** |  | [optional] 
 **name** | **str** |  | [optional] 
 **avatar_url** | **str** |  | [optional] 
-**status** | [**KgitproxyGithubInstallationStatus**](KgitproxyGithubInstallationStatus.md) |  | [optional] [default to KgitproxyGithubInstallationStatus.INVALID]
+**status** | [**KgitproxyGithubInstallationStatus**](KgitproxyGithubInstallationStatus.md) |  | [optional] 
 **installed_at** | **datetime** |  | [optional] 
 **suspended_at** | **datetime** |  | [optional] 
-**indexing_status** | [**KgitproxyIndexingStatus**](KgitproxyIndexingStatus.md) |  | [optional] [default to KgitproxyIndexingStatus.INVALID_INDEXING_STATUS]
+**indexing_status** | [**KgitproxyIndexingStatus**](KgitproxyIndexingStatus.md) |  | [optional] 
 **indexed_repositories** | **int** |  | [optional] 
 **total_repositories** | **int** |  | [optional] 
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**volume_type** | [**PersistentVolumeBackingStore**](PersistentVolumeBackingStore.md) |  | [optional] [default to PersistentVolumeBackingStore.INVALID]
+**volume_type** | [**PersistentVolumeBackingStore**](PersistentVolumeBackingStore.md) |  | [optional] 
 **name** | **str** |  | [optional] 
 **region** | **str** |  | [optional] 
 **read_only** | **bool** |  | [optional] 

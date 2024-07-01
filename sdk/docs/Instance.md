@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **region** | **str** |  | [optional] 
 **datacenter** | **str** |  | [optional] 
 **hypervisor** | **str** |  | [optional] 
-**status** | [**InstanceStatus**](InstanceStatus.md) |  | [optional] [default to InstanceStatus.ALLOCATING]
+**status** | [**InstanceStatus**](InstanceStatus.md) |  | [optional] 
 **messages** | **List[str]** |  | [optional] 
 **started_at** | **datetime** |  | [optional] 
 **succeeded_at** | **datetime** |  | [optional] 

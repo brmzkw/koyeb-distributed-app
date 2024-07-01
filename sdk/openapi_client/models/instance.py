@@ -41,7 +41,7 @@ class Instance(BaseModel):
     region: Optional[StrictStr] = None
     datacenter: Optional[StrictStr] = None
     hypervisor: Optional[StrictStr] = None
-    status: Optional[InstanceStatus] = InstanceStatus.ALLOCATING
+    status: Optional[InstanceStatus] = None
     messages: Optional[List[StrictStr]] = None
     started_at: Optional[datetime] = None
     succeeded_at: Optional[datetime] = None
@@ -113,7 +113,7 @@ class Instance(BaseModel):
             "region": obj.get("region"),
             "datacenter": obj.get("datacenter"),
             "hypervisor": obj.get("hypervisor"),
-            "status": obj.get("status") if obj.get("status") is not None else InstanceStatus.ALLOCATING,
+            "status": obj.get("status"),
             "messages": obj.get("messages"),
             "started_at": obj.get("started_at"),
             "succeeded_at": obj.get("succeeded_at"),

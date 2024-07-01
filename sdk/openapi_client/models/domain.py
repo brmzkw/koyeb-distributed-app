@@ -34,8 +34,8 @@ class Domain(BaseModel):
     name: Optional[StrictStr] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
-    status: Optional[DomainStatus] = DomainStatus.PENDING
-    type: Optional[DomainType] = DomainType.AUTOASSIGNED
+    status: Optional[DomainStatus] = None
+    type: Optional[DomainType] = None
     app_id: Optional[StrictStr] = None
     deployment_group: Optional[StrictStr] = None
     verified_at: Optional[datetime] = None
@@ -100,8 +100,8 @@ class Domain(BaseModel):
             "name": obj.get("name"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
-            "status": obj.get("status") if obj.get("status") is not None else DomainStatus.PENDING,
-            "type": obj.get("type") if obj.get("type") is not None else DomainType.AUTOASSIGNED,
+            "status": obj.get("status"),
+            "type": obj.get("type"),
             "app_id": obj.get("app_id"),
             "deployment_group": obj.get("deployment_group"),
             "verified_at": obj.get("verified_at"),

@@ -35,7 +35,7 @@ class Subscription(BaseModel):
     version: Optional[StrictStr] = None
     organization_id: Optional[StrictStr] = None
     stripe_subscription_id: Optional[StrictStr] = None
-    status: Optional[SubscriptionStatus] = SubscriptionStatus.INVALID
+    status: Optional[SubscriptionStatus] = None
     messages: Optional[List[StrictStr]] = None
     has_pending_update: Optional[StrictBool] = None
     stripe_pending_invoice_id: Optional[StrictStr] = None
@@ -111,7 +111,7 @@ class Subscription(BaseModel):
             "version": obj.get("version"),
             "organization_id": obj.get("organization_id"),
             "stripe_subscription_id": obj.get("stripe_subscription_id"),
-            "status": obj.get("status") if obj.get("status") is not None else SubscriptionStatus.INVALID,
+            "status": obj.get("status"),
             "messages": obj.get("messages"),
             "has_pending_update": obj.get("has_pending_update"),
             "stripe_pending_invoice_id": obj.get("stripe_pending_invoice_id"),

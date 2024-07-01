@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **organization_id** | **str** |  | [optional] 
 **user_id** | **str** |  | [optional] 
 **joined_at** | **datetime** |  | [optional] 
-**role** | [**UserRoleRole**](UserRoleRole.md) |  | [optional] [default to UserRoleRole.INVALID]
-**status** | [**OrganizationMemberStatus**](OrganizationMemberStatus.md) |  | [optional] [default to OrganizationMemberStatus.INVALID]
+**role** | [**UserRoleRole**](UserRoleRole.md) |  | [optional] 
+**status** | [**OrganizationMemberStatus**](OrganizationMemberStatus.md) |  | [optional] 
 **user** | [**PublicUser**](PublicUser.md) |  | [optional] 
 **organization** | [**PublicOrganization**](PublicOrganization.md) |  | [optional] 
 

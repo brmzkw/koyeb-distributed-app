@@ -39,7 +39,7 @@ class Secret(BaseModel):
     id: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
     organization_id: Optional[StrictStr] = None
-    type: Optional[SecretType] = SecretType.SIMPLE
+    type: Optional[SecretType] = None
     updated_at: Optional[datetime] = None
     created_at: Optional[datetime] = None
     value: Optional[StrictStr] = None
@@ -131,7 +131,7 @@ class Secret(BaseModel):
             "id": obj.get("id"),
             "name": obj.get("name"),
             "organization_id": obj.get("organization_id"),
-            "type": obj.get("type") if obj.get("type") is not None else SecretType.SIMPLE,
+            "type": obj.get("type"),
             "updated_at": obj.get("updated_at"),
             "created_at": obj.get("created_at"),
             "value": obj.get("value"),

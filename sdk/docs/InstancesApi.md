@@ -55,7 +55,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     body_stdin_data = None # bytearray | Data is base64 encoded (optional)
     body_stdin_close = True # bool | Indicate last data frame (optional)
     body_disable_tty = True # bool | Disable TTY. It's enough to specify it in the first frame (optional)
-    id_type = INVALID # str | When specified, it is used to determine if the kind of resource the id refers to. If missing, defaults to the instance id. (optional) (default to INVALID)
+    id_type = 'INVALID' # str | When specified, it is used to determine if the kind of resource the id refers to. If missing, defaults to the instance id. (optional) (default to 'INVALID')
 
     try:
         # Exec Command
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
  **body_stdin_data** | **bytearray**| Data is base64 encoded | [optional] 
  **body_stdin_close** | **bool**| Indicate last data frame | [optional] 
  **body_disable_tty** | **bool**| Disable TTY. It&#39;s enough to specify it in the first frame | [optional] 
- **id_type** | **str**| When specified, it is used to determine if the kind of resource the id refers to. If missing, defaults to the instance id. | [optional] [default to INVALID]
+ **id_type** | **str**| When specified, it is used to determine if the kind of resource the id refers to. If missing, defaults to the instance id. | [optional] [default to &#39;INVALID&#39;]
 
 ### Return type
 

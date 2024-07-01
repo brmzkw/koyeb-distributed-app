@@ -28,7 +28,7 @@ class CreateDomain(BaseModel):
     CreateDomain
     """ # noqa: E501
     name: Optional[StrictStr] = None
-    type: Optional[DomainType] = DomainType.AUTOASSIGNED
+    type: Optional[DomainType] = None
     app_id: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["name", "type", "app_id"]
 
@@ -84,7 +84,7 @@ class CreateDomain(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "type": obj.get("type") if obj.get("type") is not None else DomainType.AUTOASSIGNED,
+            "type": obj.get("type"),
             "app_id": obj.get("app_id")
         })
         return _obj

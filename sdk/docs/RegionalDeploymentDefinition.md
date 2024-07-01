@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | [optional] 
-**type** | [**RegionalDeploymentDefinitionType**](RegionalDeploymentDefinitionType.md) |  | [optional] [default to RegionalDeploymentDefinitionType.INVALID]
+**type** | [**RegionalDeploymentDefinitionType**](RegionalDeploymentDefinitionType.md) |  | [optional] 
 **routes** | [**List[Route]**](Route.md) |  | [optional] 
 **ports** | [**List[Port]**](Port.md) |  | [optional] 
 **env** | [**List[Env]**](Env.md) |  | [optional] 

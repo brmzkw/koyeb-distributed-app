@@ -45,13 +45,13 @@ class RegionalDeployment(BaseModel):
     region: Optional[StrictStr] = None
     parent_id: Optional[StrictStr] = None
     child_id: Optional[StrictStr] = None
-    status: Optional[RegionalDeploymentStatus] = RegionalDeploymentStatus.PENDING
+    status: Optional[RegionalDeploymentStatus] = None
     messages: Optional[List[StrictStr]] = None
     definition: Optional[RegionalDeploymentDefinition] = None
     datacenters: Optional[List[StrictStr]] = None
     metadata: Optional[Dict[str, Any]] = None
     provisioning_info: Optional[DeploymentProvisioningInfo] = None
-    role: Optional[RegionalDeploymentRole] = RegionalDeploymentRole.INVALID
+    role: Optional[RegionalDeploymentRole] = None
     use_kuma_v2: Optional[StrictBool] = None
     use_kata: Optional[StrictBool] = None
     version: Optional[StrictStr] = None
@@ -130,13 +130,13 @@ class RegionalDeployment(BaseModel):
             "region": obj.get("region"),
             "parent_id": obj.get("parent_id"),
             "child_id": obj.get("child_id"),
-            "status": obj.get("status") if obj.get("status") is not None else RegionalDeploymentStatus.PENDING,
+            "status": obj.get("status"),
             "messages": obj.get("messages"),
             "definition": RegionalDeploymentDefinition.from_dict(obj["definition"]) if obj.get("definition") is not None else None,
             "datacenters": obj.get("datacenters"),
             "metadata": obj.get("metadata"),
             "provisioning_info": DeploymentProvisioningInfo.from_dict(obj["provisioning_info"]) if obj.get("provisioning_info") is not None else None,
-            "role": obj.get("role") if obj.get("role") is not None else RegionalDeploymentRole.INVALID,
+            "role": obj.get("role"),
             "use_kuma_v2": obj.get("use_kuma_v2"),
             "use_kata": obj.get("use_kata"),
             "version": obj.get("version"),

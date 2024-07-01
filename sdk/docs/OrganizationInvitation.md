@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | [optional] 
 **email** | **str** |  | [optional] 
-**role** | [**UserRoleRole**](UserRoleRole.md) |  | [optional] [default to UserRoleRole.INVALID]
-**status** | [**OrganizationInvitationStatus**](OrganizationInvitationStatus.md) |  | [optional] [default to OrganizationInvitationStatus.INVALID]
+**role** | [**UserRoleRole**](UserRoleRole.md) |  | [optional] 
+**status** | [**OrganizationInvitationStatus**](OrganizationInvitationStatus.md) |  | [optional] 
 **expires_at** | **datetime** |  | [optional] 
 **organization_id** | **str** |  | [optional] 
 **organization** | [**PublicOrganization**](PublicOrganization.md) |  | [optional] 

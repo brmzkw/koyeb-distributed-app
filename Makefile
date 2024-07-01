@@ -4,7 +4,7 @@ gen: clean
 		-v ./sdk:/sdk \
 		-w /sdk \
 		-v ./swagger.json:/swagger.json:ro \
-		openapitools/openapi-generator-cli \
+		openapitools/openapi-generator-cli:v7.6.0 \
 			generate \
 			-g python \
 			-i /swagger.json

@@ -40,7 +40,7 @@ class InstanceListItem(BaseModel):
     replica_index: Optional[StrictInt] = None
     region: Optional[StrictStr] = None
     datacenter: Optional[StrictStr] = None
-    status: Optional[InstanceStatus] = InstanceStatus.ALLOCATING
+    status: Optional[InstanceStatus] = None
     messages: Optional[List[StrictStr]] = None
     xyz_deployment_id: Optional[StrictStr] = Field(default=None, description="WARNING: Please don't use the following attribute. Koyeb doesn't guarantee backwards compatible breaking change and reserve the right to completely drop it without notice. USE AT YOUR OWN RISK.")
     __properties: ClassVar[List[str]] = ["id", "created_at", "updated_at", "organization_id", "app_id", "service_id", "regional_deployment_id", "allocation_id", "type", "replica_index", "region", "datacenter", "status", "messages", "xyz_deployment_id"]
@@ -108,7 +108,7 @@ class InstanceListItem(BaseModel):
             "replica_index": obj.get("replica_index"),
             "region": obj.get("region"),
             "datacenter": obj.get("datacenter"),
-            "status": obj.get("status") if obj.get("status") is not None else InstanceStatus.ALLOCATING,
+            "status": obj.get("status"),
             "messages": obj.get("messages"),
             "xyz_deployment_id": obj.get("xyz_deployment_id")
         })

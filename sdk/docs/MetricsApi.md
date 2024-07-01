@@ -45,7 +45,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.MetricsApi(api_client)
     service_id = 'service_id_example' # str | ID of the service to query instances metrics for. Ignored if instance_id is set. (optional)
     instance_id = 'instance_id_example' # str | ID of the instance to query metrics for. (optional)
-    name = UNKNOWN # str | Metric to query. (optional) (default to UNKNOWN)
+    name = 'UNKNOWN' # str | Metric to query. (optional) (default to 'UNKNOWN')
     start = '2013-10-20T19:20:30+01:00' # datetime | (Optional) Defaults to an hour prior to end. (optional)
     end = '2013-10-20T19:20:30+01:00' # datetime | (Optional) Defaults to now. (optional)
     step = 'step_example' # str | (Optional) Must be a valid duration in hours (h) or minutes (m). Defaulst to 5m. (optional)
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **service_id** | **str**| ID of the service to query instances metrics for. Ignored if instance_id is set. | [optional] 
  **instance_id** | **str**| ID of the instance to query metrics for. | [optional] 
- **name** | **str**| Metric to query. | [optional] [default to UNKNOWN]
+ **name** | **str**| Metric to query. | [optional] [default to &#39;UNKNOWN&#39;]
  **start** | **datetime**| (Optional) Defaults to an hour prior to end. | [optional] 
  **end** | **datetime**| (Optional) Defaults to now. | [optional] 
  **step** | **str**| (Optional) Must be a valid duration in hours (h) or minutes (m). Defaulst to 5m. | [optional] 

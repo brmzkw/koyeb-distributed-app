@@ -27,7 +27,7 @@ class UpdateOrganizationPlanRequest(BaseModel):
     """
     UpdateOrganizationPlanRequest
     """ # noqa: E501
-    plan: Optional[Plan] = Plan.HOBBY
+    plan: Optional[Plan] = None
     __properties: ClassVar[List[str]] = ["plan"]
 
     model_config = ConfigDict(
@@ -81,7 +81,7 @@ class UpdateOrganizationPlanRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "plan": obj.get("plan") if obj.get("plan") is not None else Plan.HOBBY
+            "plan": obj.get("plan")
         })
         return _obj
 

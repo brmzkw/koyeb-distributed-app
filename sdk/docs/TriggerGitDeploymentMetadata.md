@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**provider** | [**TriggerGitDeploymentMetadataProvider**](TriggerGitDeploymentMetadataProvider.md) |  | [optional] [default to TriggerGitDeploymentMetadataProvider.UNKNOWN]
+**provider** | [**TriggerGitDeploymentMetadataProvider**](TriggerGitDeploymentMetadataProvider.md) |  | [optional] 
 **repository** | **str** |  | [optional] 
 **branch** | **str** |  | [optional] 
 **sha** | **str** |  | [optional] 

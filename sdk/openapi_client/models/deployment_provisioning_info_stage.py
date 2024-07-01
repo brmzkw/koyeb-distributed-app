@@ -30,7 +30,7 @@ class DeploymentProvisioningInfoStage(BaseModel):
     DeploymentProvisioningInfoStage
     """ # noqa: E501
     name: Optional[StrictStr] = None
-    status: Optional[DeploymentProvisioningInfoStageStatus] = DeploymentProvisioningInfoStageStatus.UNKNOWN
+    status: Optional[DeploymentProvisioningInfoStageStatus] = None
     messages: Optional[List[StrictStr]] = None
     started_at: Optional[datetime] = None
     finished_at: Optional[datetime] = None
@@ -96,7 +96,7 @@ class DeploymentProvisioningInfoStage(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "status": obj.get("status") if obj.get("status") is not None else DeploymentProvisioningInfoStageStatus.UNKNOWN,
+            "status": obj.get("status"),
             "messages": obj.get("messages"),
             "started_at": obj.get("started_at"),
             "finished_at": obj.get("finished_at"),

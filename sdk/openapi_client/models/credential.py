@@ -29,7 +29,7 @@ class Credential(BaseModel):
     Credential
     """ # noqa: E501
     id: Optional[StrictStr] = None
-    type: Optional[CredentialType] = CredentialType.INVALID
+    type: Optional[CredentialType] = None
     name: Optional[StrictStr] = None
     token: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
@@ -91,7 +91,7 @@ class Credential(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "type": obj.get("type") if obj.get("type") is not None else CredentialType.INVALID,
+            "type": obj.get("type"),
             "name": obj.get("name"),
             "token": obj.get("token"),
             "description": obj.get("description"),

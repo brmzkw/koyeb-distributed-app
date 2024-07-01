@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **organization_id** | **str** |  | [optional] 
 **type** | **str** |  | [optional] 
 **provider** | **str** |  | [optional] 
-**status** | [**PaymentMethodStatus**](PaymentMethodStatus.md) |  | [optional] [default to PaymentMethodStatus.INVALID]
+**status** | [**PaymentMethodStatus**](PaymentMethodStatus.md) |  | [optional] 
 **messages** | **List[str]** |  | [optional] 
 **stripe_payment_method_id** | **str** |  | [optional] 
 **authorization_verified_at** | **datetime** |  | [optional] 

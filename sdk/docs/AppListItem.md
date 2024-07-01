@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **updated_at** | **datetime** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **domains** | [**List[Domain]**](Domain.md) |  | [optional] 
-**status** | [**AppStatus**](AppStatus.md) |  | [optional] [default to AppStatus.STARTING]
+**status** | [**AppStatus**](AppStatus.md) |  | [optional] 
 **messages** | **List[str]** |  | [optional] 
 
 ## Example

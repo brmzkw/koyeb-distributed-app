@@ -27,7 +27,7 @@ class CreatePersistentVolumeRequest(BaseModel):
     """
     CreatePersistentVolumeRequest
     """ # noqa: E501
-    volume_type: Optional[PersistentVolumeBackingStore] = PersistentVolumeBackingStore.INVALID
+    volume_type: Optional[PersistentVolumeBackingStore] = None
     name: Optional[StrictStr] = None
     region: Optional[StrictStr] = None
     read_only: Optional[StrictBool] = None
@@ -85,7 +85,7 @@ class CreatePersistentVolumeRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "volume_type": obj.get("volume_type") if obj.get("volume_type") is not None else PersistentVolumeBackingStore.INVALID,
+            "volume_type": obj.get("volume_type"),
             "name": obj.get("name"),
             "region": obj.get("region"),
             "read_only": obj.get("read_only"),

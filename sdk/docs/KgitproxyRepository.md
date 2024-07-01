@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **is_private** | **bool** |  | [optional] 
 **is_disabled** | **bool** |  | [optional] 
 **default_branch** | **str** |  | [optional] 
-**provider** | [**KgitproxyRepositoryProvider**](KgitproxyRepositoryProvider.md) |  | [optional] [default to KgitproxyRepositoryProvider.INVALID_PROVIDER]
+**provider** | [**KgitproxyRepositoryProvider**](KgitproxyRepositoryProvider.md) |  | [optional] 
 **last_push_date** | **datetime** |  | [optional] 
 **github** | [**KgitproxyGitHubRepository**](KgitproxyGitHubRepository.md) |  | [optional] 
 

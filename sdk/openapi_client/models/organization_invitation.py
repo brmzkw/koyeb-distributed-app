@@ -33,8 +33,8 @@ class OrganizationInvitation(BaseModel):
     """ # noqa: E501
     id: Optional[StrictStr] = None
     email: Optional[StrictStr] = None
-    role: Optional[UserRoleRole] = UserRoleRole.INVALID
-    status: Optional[OrganizationInvitationStatus] = OrganizationInvitationStatus.INVALID
+    role: Optional[UserRoleRole] = None
+    status: Optional[OrganizationInvitationStatus] = None
     expires_at: Optional[datetime] = None
     organization_id: Optional[StrictStr] = None
     organization: Optional[PublicOrganization] = None
@@ -106,8 +106,8 @@ class OrganizationInvitation(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "email": obj.get("email"),
-            "role": obj.get("role") if obj.get("role") is not None else UserRoleRole.INVALID,
-            "status": obj.get("status") if obj.get("status") is not None else OrganizationInvitationStatus.INVALID,
+            "role": obj.get("role"),
+            "status": obj.get("status"),
             "expires_at": obj.get("expires_at"),
             "organization_id": obj.get("organization_id"),
             "organization": PublicOrganization.from_dict(obj["organization"]) if obj.get("organization") is not None else None,

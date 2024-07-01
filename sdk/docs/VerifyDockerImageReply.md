@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **bool** |  | [optional] 
 **reason** | **str** |  | [optional] 
-**code** | [**VerifyDockerImageReplyErrCode**](VerifyDockerImageReplyErrCode.md) |  | [optional] [default to VerifyDockerImageReplyErrCode.UNKNOWN]
+**code** | [**VerifyDockerImageReplyErrCode**](VerifyDockerImageReplyErrCode.md) |  | [optional] 
 
 ## Example
 

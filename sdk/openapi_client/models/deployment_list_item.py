@@ -44,7 +44,7 @@ class DeploymentListItem(BaseModel):
     service_id: Optional[StrictStr] = None
     parent_id: Optional[StrictStr] = None
     child_id: Optional[StrictStr] = None
-    status: Optional[DeploymentStatus] = DeploymentStatus.PENDING
+    status: Optional[DeploymentStatus] = None
     metadata: Optional[DeploymentMetadata] = None
     definition: Optional[DeploymentDefinition] = None
     messages: Optional[List[StrictStr]] = None
@@ -129,7 +129,7 @@ class DeploymentListItem(BaseModel):
             "service_id": obj.get("service_id"),
             "parent_id": obj.get("parent_id"),
             "child_id": obj.get("child_id"),
-            "status": obj.get("status") if obj.get("status") is not None else DeploymentStatus.PENDING,
+            "status": obj.get("status"),
             "metadata": DeploymentMetadata.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None,
             "definition": DeploymentDefinition.from_dict(obj["definition"]) if obj.get("definition") is not None else None,
             "messages": obj.get("messages"),

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **paused_at** | **datetime** |  | [optional] 
 **resumed_at** | **datetime** |  | [optional] 
 **terminated_at** | **datetime** |  | [optional] 
-**status** | [**AppStatus**](AppStatus.md) |  | [optional] [default to AppStatus.STARTING]
+**status** | [**AppStatus**](AppStatus.md) |  | [optional] 
 **messages** | **List[str]** |  | [optional] 
 **version** | **str** |  | [optional] 
 **domains** | [**List[Domain]**](Domain.md) |  | [optional] 

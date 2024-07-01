@@ -3,11 +3,11 @@
 ```
 koyeb app create distributed-app
 
-koyeb service create distributed-app/rabbitmq --docker rabbitmq:management --port 15672 --port 5672:tcp --env RABBITMQ_DEFAULT_USER=xxx --env RABBITMQ_DEFAULT_PASS=xxx
+koyeb service create distributed-app/rabbitmq --docker rabbitmq:management --port 15672 --port 5672:tcp --env RABBITMQ_DEFAULT_USER=xxx --env RABBITMQ_DEFAULT_PASS=xxx --route /:15672
 
 koyeb service create distributed-app/api --git github.com/brmzkw/koyeb-distributed-app --port 8000 --env RABBITMQ_HOST=rabbitmq.distributed-app.koyeb
 
-koyeb service create distributed-app/worker --git github.com/brmzkw/koyeb-distributed-app --env RABBITMQ_HOST=rabbitmq.distributed-app.koyeb --git-buildpack-run-command 'celery -A worker worker --loglevel=INFO' --type worker
+koyeb service create distributed-app/worker --git github.com/brmzkw/koyeb-distributed-app --env RABBITMQ_HOST=rabbitmq.distributed-app.koyeb --git-buildpack-run-command 'celery -A worker worker --loglevel=INFO -B' --type worker --env KOYEB_API_KEY=xxx
 ```
 
 
@@ -43,5 +43,6 @@ source ./venv/bin/activate
 export RABBITMQ_USER=xxx
 export RABBITMQ_PASS=xxx
 export RABBITMQ_HOST=localhost
-celery -A worker worker --loglevel=INFO
+export KOYEB_API_KEY=<api key>
+celery -A worker worker --loglevel=INFO -B
 ```

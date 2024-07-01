@@ -35,7 +35,7 @@ class AppListItem(BaseModel):
     updated_at: Optional[datetime] = None
     created_at: Optional[datetime] = None
     domains: Optional[List[Domain]] = None
-    status: Optional[AppStatus] = AppStatus.STARTING
+    status: Optional[AppStatus] = None
     messages: Optional[List[StrictStr]] = None
     __properties: ClassVar[List[str]] = ["id", "name", "organization_id", "updated_at", "created_at", "domains", "status", "messages"]
 
@@ -103,7 +103,7 @@ class AppListItem(BaseModel):
             "updated_at": obj.get("updated_at"),
             "created_at": obj.get("created_at"),
             "domains": [Domain.from_dict(_item) for _item in obj["domains"]] if obj.get("domains") is not None else None,
-            "status": obj.get("status") if obj.get("status") is not None else AppStatus.STARTING,
+            "status": obj.get("status"),
             "messages": obj.get("messages")
         })
         return _obj

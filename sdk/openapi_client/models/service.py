@@ -39,10 +39,10 @@ class Service(BaseModel):
     resumed_at: Optional[datetime] = None
     terminated_at: Optional[datetime] = None
     name: Optional[StrictStr] = None
-    type: Optional[ServiceType] = ServiceType.INVALID_TYPE
+    type: Optional[ServiceType] = None
     organization_id: Optional[StrictStr] = None
     app_id: Optional[StrictStr] = None
-    status: Optional[ServiceStatus] = ServiceStatus.STARTING
+    status: Optional[ServiceStatus] = None
     messages: Optional[List[StrictStr]] = None
     version: Optional[StrictStr] = None
     active_deployment_id: Optional[StrictStr] = None
@@ -114,10 +114,10 @@ class Service(BaseModel):
             "resumed_at": obj.get("resumed_at"),
             "terminated_at": obj.get("terminated_at"),
             "name": obj.get("name"),
-            "type": obj.get("type") if obj.get("type") is not None else ServiceType.INVALID_TYPE,
+            "type": obj.get("type"),
             "organization_id": obj.get("organization_id"),
             "app_id": obj.get("app_id"),
-            "status": obj.get("status") if obj.get("status") is not None else ServiceStatus.STARTING,
+            "status": obj.get("status"),
             "messages": obj.get("messages"),
             "version": obj.get("version"),
             "active_deployment_id": obj.get("active_deployment_id"),

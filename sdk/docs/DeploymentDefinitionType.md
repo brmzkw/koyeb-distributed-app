@@ -1,15 +1,10 @@
 # DeploymentDefinitionType
 
 
-## Enum
+## Properties
 
-* `INVALID` (value: `'INVALID'`)
-
-* `WEB` (value: `'WEB'`)
-
-* `WORKER` (value: `'WORKER'`)
-
-* `DATABASE` (value: `'DATABASE'`)
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

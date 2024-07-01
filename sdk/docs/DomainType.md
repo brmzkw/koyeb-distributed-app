@@ -1,11 +1,10 @@
 # DomainType
 
 
-## Enum
+## Properties
 
-* `AUTOASSIGNED` (value: `'AUTOASSIGNED'`)
-
-* `CUSTOM` (value: `'CUSTOM'`)
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

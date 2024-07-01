@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **version** | **str** |  | [optional] 
 **organization_id** | **str** |  | [optional] 
 **stripe_subscription_id** | **str** |  | [optional] 
-**status** | [**SubscriptionStatus**](SubscriptionStatus.md) |  | [optional] [default to SubscriptionStatus.INVALID]
+**status** | [**SubscriptionStatus**](SubscriptionStatus.md) |  | [optional] 
 **messages** | **List[str]** |  | [optional] 
 **has_pending_update** | **bool** |  | [optional] 
 **stripe_pending_invoice_id** | **str** |  | [optional] 

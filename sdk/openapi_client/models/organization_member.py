@@ -35,8 +35,8 @@ class OrganizationMember(BaseModel):
     organization_id: Optional[StrictStr] = None
     user_id: Optional[StrictStr] = None
     joined_at: Optional[datetime] = None
-    role: Optional[UserRoleRole] = UserRoleRole.INVALID
-    status: Optional[OrganizationMemberStatus] = OrganizationMemberStatus.INVALID
+    role: Optional[UserRoleRole] = None
+    status: Optional[OrganizationMemberStatus] = None
     user: Optional[PublicUser] = None
     organization: Optional[PublicOrganization] = None
     __properties: ClassVar[List[str]] = ["id", "organization_id", "user_id", "joined_at", "role", "status", "user", "organization"]
@@ -102,8 +102,8 @@ class OrganizationMember(BaseModel):
             "organization_id": obj.get("organization_id"),
             "user_id": obj.get("user_id"),
             "joined_at": obj.get("joined_at"),
-            "role": obj.get("role") if obj.get("role") is not None else UserRoleRole.INVALID,
-            "status": obj.get("status") if obj.get("status") is not None else OrganizationMemberStatus.INVALID,
+            "role": obj.get("role"),
+            "status": obj.get("status"),
             "user": PublicUser.from_dict(obj["user"]) if obj.get("user") is not None else None,
             "organization": PublicOrganization.from_dict(obj["organization"]) if obj.get("organization") is not None else None
         })

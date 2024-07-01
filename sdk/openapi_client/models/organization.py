@@ -43,16 +43,16 @@ class Organization(BaseModel):
     billing_name: Optional[StrictStr] = None
     billing_email: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
-    plan: Optional[Plan] = Plan.HOBBY
+    plan: Optional[Plan] = None
     plan_updated_at: Optional[datetime] = None
     has_payment_method: Optional[StrictBool] = None
     subscription_id: Optional[StrictStr] = None
     current_subscription_id: Optional[StrictStr] = None
     latest_subscription_id: Optional[StrictStr] = None
     signup_qualification: Optional[Dict[str, Any]] = None
-    status: Optional[OrganizationStatus] = OrganizationStatus.WARNING
-    status_message: Optional[OrganizationDetailedStatus] = OrganizationDetailedStatus.NEW
-    deactivation_reason: Optional[OrganizationDeactivationReason] = OrganizationDeactivationReason.INVALID
+    status: Optional[OrganizationStatus] = None
+    status_message: Optional[OrganizationDetailedStatus] = None
+    deactivation_reason: Optional[OrganizationDeactivationReason] = None
     verified: Optional[StrictBool] = None
     qualifies_for_hobby23: Optional[StrictBool] = None
     reprocess_after: Optional[datetime] = None
@@ -121,16 +121,16 @@ class Organization(BaseModel):
             "billing_name": obj.get("billing_name"),
             "billing_email": obj.get("billing_email"),
             "name": obj.get("name"),
-            "plan": obj.get("plan") if obj.get("plan") is not None else Plan.HOBBY,
+            "plan": obj.get("plan"),
             "plan_updated_at": obj.get("plan_updated_at"),
             "has_payment_method": obj.get("has_payment_method"),
             "subscription_id": obj.get("subscription_id"),
             "current_subscription_id": obj.get("current_subscription_id"),
             "latest_subscription_id": obj.get("latest_subscription_id"),
             "signup_qualification": obj.get("signup_qualification"),
-            "status": obj.get("status") if obj.get("status") is not None else OrganizationStatus.WARNING,
-            "status_message": obj.get("status_message") if obj.get("status_message") is not None else OrganizationDetailedStatus.NEW,
-            "deactivation_reason": obj.get("deactivation_reason") if obj.get("deactivation_reason") is not None else OrganizationDeactivationReason.INVALID,
+            "status": obj.get("status"),
+            "status_message": obj.get("status_message"),
+            "deactivation_reason": obj.get("deactivation_reason"),
             "verified": obj.get("verified"),
             "qualifies_for_hobby23": obj.get("qualifies_for_hobby23"),
             "reprocess_after": obj.get("reprocess_after")

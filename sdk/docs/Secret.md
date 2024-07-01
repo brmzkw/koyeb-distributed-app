@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | **str** |  | [optional] 
 **name** | **str** |  | [optional] 
 **organization_id** | **str** |  | [optional] 
-**type** | [**SecretType**](SecretType.md) |  | [optional] [default to SecretType.SIMPLE]
+**type** | [**SecretType**](SecretType.md) |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **value** | **str** |  | [optional] 

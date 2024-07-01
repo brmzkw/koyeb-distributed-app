@@ -37,7 +37,7 @@ class KgitproxyRepository(BaseModel):
     is_private: Optional[StrictBool] = None
     is_disabled: Optional[StrictBool] = None
     default_branch: Optional[StrictStr] = None
-    provider: Optional[KgitproxyRepositoryProvider] = KgitproxyRepositoryProvider.INVALID_PROVIDER
+    provider: Optional[KgitproxyRepositoryProvider] = None
     last_push_date: Optional[datetime] = None
     github: Optional[KgitproxyGitHubRepository] = None
     __properties: ClassVar[List[str]] = ["id", "organization_id", "name", "url", "description", "is_private", "is_disabled", "default_branch", "provider", "last_push_date", "github"]
@@ -104,7 +104,7 @@ class KgitproxyRepository(BaseModel):
             "is_private": obj.get("is_private"),
             "is_disabled": obj.get("is_disabled"),
             "default_branch": obj.get("default_branch"),
-            "provider": obj.get("provider") if obj.get("provider") is not None else KgitproxyRepositoryProvider.INVALID_PROVIDER,
+            "provider": obj.get("provider"),
             "last_push_date": obj.get("last_push_date"),
             "github": KgitproxyGitHubRepository.from_dict(obj["github"]) if obj.get("github") is not None else None
         })

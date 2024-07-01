@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | [optional] 
-**type** | [**DeploymentDefinitionType**](DeploymentDefinitionType.md) |  | [optional] [default to DeploymentDefinitionType.INVALID]
+**type** | [**DeploymentDefinitionType**](DeploymentDefinitionType.md) |  | [optional] 
 **routes** | [**List[DeploymentRoute]**](DeploymentRoute.md) |  | [optional] 
 **ports** | [**List[DeploymentPort]**](DeploymentPort.md) |  | [optional] 
 **env** | [**List[DeploymentEnv]**](DeploymentEnv.md) |  | [optional] 

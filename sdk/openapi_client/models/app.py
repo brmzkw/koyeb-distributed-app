@@ -39,7 +39,7 @@ class App(BaseModel):
     paused_at: Optional[datetime] = None
     resumed_at: Optional[datetime] = None
     terminated_at: Optional[datetime] = None
-    status: Optional[AppStatus] = AppStatus.STARTING
+    status: Optional[AppStatus] = None
     messages: Optional[List[StrictStr]] = None
     version: Optional[StrictStr] = None
     domains: Optional[List[Domain]] = None
@@ -113,7 +113,7 @@ class App(BaseModel):
             "paused_at": obj.get("paused_at"),
             "resumed_at": obj.get("resumed_at"),
             "terminated_at": obj.get("terminated_at"),
-            "status": obj.get("status") if obj.get("status") is not None else AppStatus.STARTING,
+            "status": obj.get("status"),
             "messages": obj.get("messages"),
             "version": obj.get("version"),
             "domains": [Domain.from_dict(_item) for _item in obj["domains"]] if obj.get("domains") is not None else None

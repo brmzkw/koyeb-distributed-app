@@ -39,7 +39,7 @@ class DeploymentDefinition(BaseModel):
     DeploymentDefinition
     """ # noqa: E501
     name: Optional[StrictStr] = None
-    type: Optional[DeploymentDefinitionType] = DeploymentDefinitionType.INVALID
+    type: Optional[DeploymentDefinitionType] = None
     routes: Optional[List[DeploymentRoute]] = None
     ports: Optional[List[DeploymentPort]] = None
     env: Optional[List[DeploymentEnv]] = None
@@ -168,7 +168,7 @@ class DeploymentDefinition(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "type": obj.get("type") if obj.get("type") is not None else DeploymentDefinitionType.INVALID,
+            "type": obj.get("type"),
             "routes": [DeploymentRoute.from_dict(_item) for _item in obj["routes"]] if obj.get("routes") is not None else None,
             "ports": [DeploymentPort.from_dict(_item) for _item in obj["ports"]] if obj.get("ports") is not None else None,
             "env": [DeploymentEnv.from_dict(_item) for _item in obj["env"]] if obj.get("env") is not None else None,

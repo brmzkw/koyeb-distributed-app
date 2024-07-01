@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | [optional] 
 **is_default** | **bool** |  | [optional] 
 **is_protected** | **bool** |  | [optional] 
-**provider** | [**KgitproxyRepositoryProvider**](KgitproxyRepositoryProvider.md) |  | [optional] [default to KgitproxyRepositoryProvider.INVALID_PROVIDER]
+**provider** | [**KgitproxyRepositoryProvider**](KgitproxyRepositoryProvider.md) |  | [optional] 
 
 ## Example
 

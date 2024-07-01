@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | [optional] 
 **name** | **str** |  | [optional] 
-**plan** | [**Plan**](Plan.md) |  | [optional] [default to Plan.HOBBY]
-**status** | [**OrganizationStatus**](OrganizationStatus.md) |  | [optional] [default to OrganizationStatus.WARNING]
+**plan** | [**Plan**](Plan.md) |  | [optional] 
+**status** | [**OrganizationStatus**](OrganizationStatus.md) |  | [optional] 
 
 ## Example
 

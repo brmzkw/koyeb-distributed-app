@@ -37,7 +37,7 @@ class RegionalDeploymentDefinition(BaseModel):
     RegionalDeploymentDefinition
     """ # noqa: E501
     name: Optional[StrictStr] = None
-    type: Optional[RegionalDeploymentDefinitionType] = RegionalDeploymentDefinitionType.INVALID
+    type: Optional[RegionalDeploymentDefinitionType] = None
     routes: Optional[List[Route]] = None
     ports: Optional[List[Port]] = None
     env: Optional[List[Env]] = None
@@ -153,7 +153,7 @@ class RegionalDeploymentDefinition(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "type": obj.get("type") if obj.get("type") is not None else RegionalDeploymentDefinitionType.INVALID,
+            "type": obj.get("type"),
             "routes": [Route.from_dict(_item) for _item in obj["routes"]] if obj.get("routes") is not None else None,
             "ports": [Port.from_dict(_item) for _item in obj["ports"]] if obj.get("ports") is not None else None,
             "env": [Env.from_dict(_item) for _item in obj["env"]] if obj.get("env") is not None else None,
