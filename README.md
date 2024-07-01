@@ -7,7 +7,7 @@ koyeb service create distributed-app/rabbitmq --docker rabbitmq:management --por
 
 koyeb service create distributed-app/api --git github.com/brmzkw/koyeb-distributed-app --port 8000 --env RABBITMQ_HOST=rabbitmq.distributed-app.koyeb
 
-koyeb service create distributed-app/worker --git github.com/brmzkw/koyeb-distributed-app --env RABBITMQ_HOST=rabbitmq.distributed-app.koyeb --git-buildpack-run-command 'celery -A worker worker --loglevel=INFO -B' --type worker --env KOYEB_API_KEY=xxx
+koyeb service create distributed-app/worker --git github.com/brmzkw/koyeb-distributed-app --env RABBITMQ_HOST=rabbitmq.distributed-app.koyeb --git-buildpack-run-command 'celery -A worker worker --loglevel=INFO -B -Q high_priority,celery' --type worker --env KOYEB_API_KEY=xxx
 ```
 
 
