@@ -58,10 +58,6 @@ def scale_koyeb_service():
 
 
 def do_service_scale(expected_count):
-    # Force to have at least 1 worker
-    if expected_count < 1:
-        expected_count = 1
-
     configuration = Configuration(
         host="https://app.koyeb.com",
         api_key={
@@ -99,6 +95,10 @@ def do_service_scale(expected_count):
         else:
             direction = 'up'
             new_count = current_count + 1
+
+        # Force to have at least 1 worker
+        if new_count < 1:
+            new_count = 1
 
         for idx, _ in enumerate(deployment.definition.scalings):
             deployment.definition.scalings[idx].min = new_count
