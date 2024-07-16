@@ -173,6 +173,7 @@ class TestRedeployReply(unittest.TestCase):
                             ], ), 
                     database_info = openapi_client.models.deployment_database_info.DeploymentDatabaseInfo(), 
                     skip_build = True, 
+                    role = 'INVALID', 
                     version = '', 
                     deployment_group = '', )
             )

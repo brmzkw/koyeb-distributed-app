@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **regions** | **List[str]** |  | [optional] 
 **max_organization_members** | **str** |  | [optional] 
 **max_instances_by_type** | **Dict[str, str]** |  | [optional] 
+**persistent_volumes_by_region** | [**Dict[str, PersistentVolumeQuotas]**](PersistentVolumeQuotas.md) |  | [optional] 
 
 ## Example
 

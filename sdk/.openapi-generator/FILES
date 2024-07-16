@@ -84,6 +84,7 @@ docs/DeploymentProvisioningInfo.md
 docs/DeploymentProvisioningInfoStage.md
 docs/DeploymentProvisioningInfoStageBuildAttempt.md
 docs/DeploymentProvisioningInfoStageStatus.md
+docs/DeploymentRole.md
 docs/DeploymentRoute.md
 docs/DeploymentScaling.md
 docs/DeploymentScalingTarget.md
@@ -244,6 +245,7 @@ docs/PaymentMethodsApi.md
 docs/PeriodUsage.md
 docs/PersistentVolume.md
 docs/PersistentVolumeBackingStore.md
+docs/PersistentVolumeQuotas.md
 docs/PersistentVolumeStatus.md
 docs/PersistentVolumesApi.md
 docs/Plan.md
@@ -453,6 +455,7 @@ openapi_client/models/deployment_provisioning_info.py
 openapi_client/models/deployment_provisioning_info_stage.py
 openapi_client/models/deployment_provisioning_info_stage_build_attempt.py
 openapi_client/models/deployment_provisioning_info_stage_status.py
+openapi_client/models/deployment_role.py
 openapi_client/models/deployment_route.py
 openapi_client/models/deployment_scaling.py
 openapi_client/models/deployment_scaling_target.py
@@ -599,6 +602,7 @@ openapi_client/models/payment_method_status.py
 openapi_client/models/period_usage.py
 openapi_client/models/persistent_volume.py
 openapi_client/models/persistent_volume_backing_store.py
+openapi_client/models/persistent_volume_quotas.py
 openapi_client/models/persistent_volume_status.py
 openapi_client/models/plan.py
 openapi_client/models/port.py
@@ -766,6 +770,7 @@ test/test_deployment_provisioning_info.py
 test/test_deployment_provisioning_info_stage.py
 test/test_deployment_provisioning_info_stage_build_attempt.py
 test/test_deployment_provisioning_info_stage_status.py
+test/test_deployment_role.py
 test/test_deployment_route.py
 test/test_deployment_scaling.py
 test/test_deployment_scaling_target.py
@@ -926,6 +931,7 @@ test/test_payment_methods_api.py
 test/test_period_usage.py
 test/test_persistent_volume.py
 test/test_persistent_volume_backing_store.py
+test/test_persistent_volume_quotas.py
 test/test_persistent_volume_status.py
 test/test_persistent_volumes_api.py
 test/test_plan.py

@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **provisioning_info** | [**DeploymentProvisioningInfo**](DeploymentProvisioningInfo.md) |  | [optional] 
 **database_info** | [**DeploymentDatabaseInfo**](DeploymentDatabaseInfo.md) |  | [optional] 
 **skip_build** | **bool** |  | [optional] 
+**role** | [**DeploymentRole**](DeploymentRole.md) |  | [optional] 
 **version** | **str** |  | [optional] 
 **deployment_group** | **str** |  | [optional] 
 

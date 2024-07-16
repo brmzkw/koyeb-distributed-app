@@ -24,6 +24,7 @@ from openapi_client.models.deployment_database_info import DeploymentDatabaseInf
 from openapi_client.models.deployment_definition import DeploymentDefinition
 from openapi_client.models.deployment_metadata import DeploymentMetadata
 from openapi_client.models.deployment_provisioning_info import DeploymentProvisioningInfo
+from openapi_client.models.deployment_role import DeploymentRole
 from openapi_client.models.deployment_status import DeploymentStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -51,9 +52,10 @@ class Deployment(BaseModel):
     provisioning_info: Optional[DeploymentProvisioningInfo] = None
     database_info: Optional[DeploymentDatabaseInfo] = None
     skip_build: Optional[StrictBool] = None
+    role: Optional[DeploymentRole] = None
     version: Optional[StrictStr] = None
     deployment_group: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["id", "created_at", "updated_at", "allocated_at", "started_at", "succeeded_at", "terminated_at", "organization_id", "app_id", "service_id", "parent_id", "child_id", "status", "metadata", "definition", "messages", "provisioning_info", "database_info", "skip_build", "version", "deployment_group"]
+    __properties: ClassVar[List[str]] = ["id", "created_at", "updated_at", "allocated_at", "started_at", "succeeded_at", "terminated_at", "organization_id", "app_id", "service_id", "parent_id", "child_id", "status", "metadata", "definition", "messages", "provisioning_info", "database_info", "skip_build", "role", "version", "deployment_group"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -137,6 +139,7 @@ class Deployment(BaseModel):
             "provisioning_info": DeploymentProvisioningInfo.from_dict(obj["provisioning_info"]) if obj.get("provisioning_info") is not None else None,
             "database_info": DeploymentDatabaseInfo.from_dict(obj["database_info"]) if obj.get("database_info") is not None else None,
             "skip_build": obj.get("skip_build"),
+            "role": obj.get("role"),
             "version": obj.get("version"),
             "deployment_group": obj.get("deployment_group")
         })

@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from openapi_client.models.persistent_volume_quotas import PersistentVolumeQuotas
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,7 +37,8 @@ class Quotas(BaseModel):
     regions: Optional[List[StrictStr]] = None
     max_organization_members: Optional[StrictStr] = None
     max_instances_by_type: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["apps", "services", "domains", "services_by_app", "service_provisioning_concurrency", "memory_mb", "instance_types", "regions", "max_organization_members", "max_instances_by_type"]
+    persistent_volumes_by_region: Optional[Dict[str, PersistentVolumeQuotas]] = None
+    __properties: ClassVar[List[str]] = ["apps", "services", "domains", "services_by_app", "service_provisioning_concurrency", "memory_mb", "instance_types", "regions", "max_organization_members", "max_instances_by_type", "persistent_volumes_by_region"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +79,13 @@ class Quotas(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in persistent_volumes_by_region (dict)
+        _field_dict = {}
+        if self.persistent_volumes_by_region:
+            for _key in self.persistent_volumes_by_region:
+                if self.persistent_volumes_by_region[_key]:
+                    _field_dict[_key] = self.persistent_volumes_by_region[_key].to_dict()
+            _dict['persistent_volumes_by_region'] = _field_dict
         return _dict
 
     @classmethod
@@ -98,7 +107,13 @@ class Quotas(BaseModel):
             "instance_types": obj.get("instance_types"),
             "regions": obj.get("regions"),
             "max_organization_members": obj.get("max_organization_members"),
-            "max_instances_by_type": obj.get("max_instances_by_type")
+            "max_instances_by_type": obj.get("max_instances_by_type"),
+            "persistent_volumes_by_region": dict(
+                (_k, PersistentVolumeQuotas.from_dict(_v))
+                for _k, _v in obj["persistent_volumes_by_region"].items()
+            )
+            if obj.get("persistent_volumes_by_region") is not None
+            else None
         })
         return _obj
 

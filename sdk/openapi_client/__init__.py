@@ -138,6 +138,7 @@ from openapi_client.models.deployment_provisioning_info import DeploymentProvisi
 from openapi_client.models.deployment_provisioning_info_stage import DeploymentProvisioningInfoStage
 from openapi_client.models.deployment_provisioning_info_stage_build_attempt import DeploymentProvisioningInfoStageBuildAttempt
 from openapi_client.models.deployment_provisioning_info_stage_status import DeploymentProvisioningInfoStageStatus
+from openapi_client.models.deployment_role import DeploymentRole
 from openapi_client.models.deployment_route import DeploymentRoute
 from openapi_client.models.deployment_scaling import DeploymentScaling
 from openapi_client.models.deployment_scaling_target import DeploymentScalingTarget
@@ -284,6 +285,7 @@ from openapi_client.models.payment_method_status import PaymentMethodStatus
 from openapi_client.models.period_usage import PeriodUsage
 from openapi_client.models.persistent_volume import PersistentVolume
 from openapi_client.models.persistent_volume_backing_store import PersistentVolumeBackingStore
+from openapi_client.models.persistent_volume_quotas import PersistentVolumeQuotas
 from openapi_client.models.persistent_volume_status import PersistentVolumeStatus
 from openapi_client.models.plan import Plan
 from openapi_client.models.port import Port

@@ -226,6 +226,7 @@ class TestDeployment(unittest.TestCase):
                                 secret_id = '', )
                             ], ), ),
                 skip_build = True,
+                role = 'INVALID',
                 version = '',
                 deployment_group = ''
             )

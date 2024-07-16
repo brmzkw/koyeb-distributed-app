@@ -51,6 +51,12 @@ class TestGetQuotasReply(unittest.TestCase):
                     max_organization_members = '', 
                     max_instances_by_type = {
                         'key' : ''
+                        }, 
+                    persistent_volumes_by_region = {
+                        'key' : openapi_client.models.persistent_volume_quotas.PersistentVolumeQuotas(
+                            max_total_size = 56, 
+                            max_volume_size = 56, 
+                            max_per_instance_size = 56, )
                         }, )
             )
         else:
