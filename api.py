@@ -80,7 +80,8 @@ def scale_app():
             new_count = current_count - 1
             print(f'Scaling down service from {current_count} to {new_count} instances')
         else:
-            print(f'Scaling down service from {current_count} to {new_count} instances')
+            new_count = current_count + 1
+            print(f'Scaling up service from {current_count} to {new_count} instances')
 
         for idx, _ in enumerate(deployment.definition.scalings):
             deployment.definition.scalings[idx].min = new_count
