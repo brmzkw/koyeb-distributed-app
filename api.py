@@ -23,6 +23,7 @@ KOYEB_WORKER_SERVICE = os.getenv('KOYEB_WORKER_SERVICE', 'worker')
 last_scale_event = None
 
 def scale_app():
+    global last_scale_event
     if last_scale_event:
         if datetime.datetime.now() - last_scale_event < datetime.timedelta(minutes=5):
             print('We scaled the service recently, avoid to scale again')
