@@ -9,7 +9,7 @@ koyeb service create dapp-api/api --git github.com/brmzkw/koyeb-distributed-app 
 
 koyeb app create dapp-worker
 export KOYEB_API_KEY=<xxx>
-koyeb service create dapp-worker/worker --git github.com/brmzkw/koyeb-distributed-app --env RABBITMQ_HOST=rabbitmq.dapp-rabbitmq.koyeb --git-buildpack-run-command 'celery -A worker worker --loglevel=INFO -B -Q high_priority,celery' --type worker --env KOYEB_API_KEY=$KOYEB_API_KEY
+koyeb service create dapp-worker/worker --git github.com/brmzkw/koyeb-distributed-app --env RABBITMQ_HOST=rabbitmq.dapp-rabbitmq.koyeb --git-buildpack-run-command 'celery -A worker worker --loglevel=INFO' --type worker --env KOYEB_API_KEY=$KOYEB_API_KEY
 ```
 
 

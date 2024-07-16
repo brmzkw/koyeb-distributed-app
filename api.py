@@ -99,7 +99,7 @@ def root():
     return f'Sent task to worker which will take {n} seconds to complete!'
 
 
-def main():
+def create_app():
     # In debug mode, Flask will reload itself on code changes. Avoid setting up the scheduler in this case.
     if not flask_app.debug or os.environ.get("WERKZEUG_RUN_MAIN"):
         scheduler = BackgroundScheduler()
@@ -107,9 +107,13 @@ def main():
         scheduler.start()
         # Shut down the scheduler when exiting the app
         atexit.register(lambda: scheduler.shutdown())
+    return flask_app
 
-    flask_app.run()
+
+def debug():
+    app = create_app()
+    app.run()
 
 
 if __name__ == "__main__":
-    main()
+    debug()
