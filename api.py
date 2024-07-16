@@ -37,7 +37,7 @@ def scale_app():
     queue = channel.queue_declare(queue='celery', passive=True)
     ready_tasks = queue.method.message_count
 
-    # Let's assume we want to have maximum 10 tasks in the queue per worker, with a minimum of 1 worker
+    # Let's assume we want to have maximum 50 tasks in the queue per worker, with a minimum of 1 worker
     expected_count = max(math.ceil(ready_tasks / 10), 1)
     print(f'>> Queue has {ready_tasks} tasks, expected workers count: {expected_count}')
 
@@ -73,12 +73,12 @@ def scale_app():
         if current_count == expected_count:
             print(f'>> Service already scaled to {expected_count} instances, skipping')
             return
-        elif current_count > expected_count:
-            direction = 'down'
+
+        if current_count > expected_count:
             new_count = current_count - 1
+            print(f'Scaling down service from {current_count} to {new_count} instances')
         else:
-            direction = 'up'
-            new_count = current_count + 1
+            print(f'Scaling down service from {current_count} to {new_count} instances')
 
         for idx, _ in enumerate(deployment.definition.scalings):
             deployment.definition.scalings[idx].min = new_count
@@ -89,7 +89,6 @@ def scale_app():
             id=services[0].id,
             service=update_body
         )
-        print(f'Scaling {direction} service to {new_count} instances')
 
 
 
