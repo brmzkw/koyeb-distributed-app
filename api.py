@@ -79,7 +79,7 @@ def scale_app():
             new_count = current_count - 1
             print(f'Scaling down service from {current_count} to {new_count} instances')
         else:
-            new_count = current_count + 1
+            new_count = expected_count
             print(f'Scaling up service from {current_count} to {new_count} instances')
 
         for idx, _ in enumerate(deployment.definition.scalings):
@@ -87,10 +87,12 @@ def scale_app():
             deployment.definition.scalings[idx].max = new_count
 
         update_body = UpdateService(definition=deployment.definition, skip_build=True)
-        ServicesApi(api_client=api_client).update_service(
+        resp = ServicesApi(api_client=api_client).update_service(
             id=services[0].id,
             service=update_body
         )
+        print('Scale response:', resp)
+        print('As json:', resp.model_dump_json())
         last_scale_event = datetime.datetime.now()
 
 
