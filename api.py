@@ -28,7 +28,6 @@ def scale_app():
         if datetime.datetime.now() - last_scale_event < datetime.timedelta(minutes=5):
             print('We scaled the service recently, avoid to scale again')
             return
-        last_scale_event = datetime.datetime.now()
     
     print('Checking if we need to scale the service...')
 
@@ -92,7 +91,7 @@ def scale_app():
             id=services[0].id,
             service=update_body
         )
-
+        last_scale_event = datetime.datetime.now()
 
 
 @flask_app.route('/')
