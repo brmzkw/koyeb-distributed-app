@@ -88,12 +88,10 @@ def scale_app():
             deployment.definition.scalings[idx].max = new_count
 
         update_body = UpdateService(definition=deployment.definition, skip_build=True)
-        resp = ServicesApi(api_client=api_client).update_service(
+        ServicesApi(api_client=api_client).update_service(
             id=services[0].id,
             service=update_body
         )
-        print('Scale response:', resp)
-        print('As json:', resp.model_dump_json())
         last_scale_event = datetime.datetime.now()
 
 
