@@ -20,13 +20,14 @@ KOYEB_API_KEY = os.environ.get('KOYEB_API_KEY')
 KOYEB_WORKER_APP = os.getenv('KOYEB_WORKER_APP', 'dapp-worker')
 KOYEB_WORKER_SERVICE = os.getenv('KOYEB_WORKER_SERVICE', 'worker')
 
-last_scale_event = datetime.datetime.now()
+last_scale_event = None
 
 def scale_app():
-    last_scale = datetime.datetime.now() - last_scale_event
-    if last_scale < datetime.timedelta(minutes=5):
-        print('We scaled the service recently, avoid to scale again')
-        return
+    if last_scale_event:
+        if datetime.datetime.now() - last_scale_event < datetime.timedelta(minutes=5):
+            print('We scaled the service recently, avoid to scale again')
+            return
+        last_scale_event = datetime.datetime.now()
     
     print('Checking if we need to scale the service...')
 
