@@ -79,7 +79,8 @@ def scale_app():
             new_count = current_count - 1
             print(f'Scaling down service from {current_count} to {new_count} instances')
         else:
-            new_count = expected_count
+            # Limit the scaling to 5 instances
+            new_count = max(expected_count, 5)
             print(f'Scaling up service from {current_count} to {new_count} instances')
 
         for idx, _ in enumerate(deployment.definition.scalings):
