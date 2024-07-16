@@ -103,7 +103,7 @@ def create_app():
     # In debug mode, Flask will reload itself on code changes. Avoid setting up the scheduler in this case.
     if not flask_app.debug or os.environ.get("WERKZEUG_RUN_MAIN"):
         scheduler = BackgroundScheduler()
-        scheduler.add_job(func=scale_app, trigger="interval", seconds=1)
+        scheduler.add_job(func=scale_app, trigger="interval", seconds=10)
         scheduler.start()
         # Shut down the scheduler when exiting the app
         atexit.register(lambda: scheduler.shutdown())
