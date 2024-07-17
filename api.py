@@ -32,6 +32,7 @@ def is_active_deployment(api_client):
     if active_deployment_id != regional_deployment.deployment_id:
         print(f'The API service active deployment ({active_deployment_id}) is different from this instance deployment ({regional_deployment.deployment_id}), likely because a new deployment is in progress. Skip scaling on this instance.')
         return False
+    return True
 
 
 def scale_app():
