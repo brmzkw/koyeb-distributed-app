@@ -55,7 +55,7 @@ def scale_app():
 
         print('Checking if we need to scale the service...')
 
-        if not is_active_deployment():
+        if not is_active_deployment(api_client):
             return
 
         # Connect to RabbitMQ, and get the number of tasks in the default "celery" queue used to process tasks.
