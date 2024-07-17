@@ -1,11 +1,8 @@
-import math
 import os
 import time
-from celery import Celery
-from kombu import Exchange, Queue
-import pika
 
-from sdk.openapi_client import ApiClient, Configuration, ServicesApi, AppsApi, DeploymentsApi, UpdateService
+from celery import Celery
+
 
 RABBITMQ_USER = os.getenv('RABBITMQ_USER', 'xxx')
 RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASS', 'xxx')

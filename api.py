@@ -13,38 +13,28 @@ from sdk.openapi_client import ApiClient, Configuration, ServicesApi, AppsApi, D
 from worker import process_file, RABBITMQ_PASSWORD, RABBITMQ_USER, RABBITMQ_HOST
 
 
-
 flask_app = Flask(__name__)
 
 KOYEB_API_KEY = os.environ.get('KOYEB_API_KEY')
 KOYEB_WORKER_APP = os.getenv('KOYEB_WORKER_APP', 'dapp-worker')
 KOYEB_WORKER_SERVICE = os.getenv('KOYEB_WORKER_SERVICE', 'worker')
 
-# Given by the Koyeb platform
-REGIONAL_DEPLOYMENT_ID = os.getenv('KOYEB_REGIONAL_DEPLOYMENT_ID', '')
-
 last_scale_event = None
 
+
+def is_active_deployment(api_client):
+    """Check if the instance executing this code is running the active
+    deployment of the service. During a new deployment, we don't want to execute
+    the scaling logic on the previous deployment."""
+    service = ServicesApi(api_client).get_service(id=os.environ['KOYEB_SERVICE_ID']).service
+    active_deployment_id = service.active_deployment_id
+    regional_deployment = RegionalDeploymentsApi(api_client).get_regional_deployment(id=os.environ['KOYEB_REGIONAL_DEPLOYMENT_ID']).regional_deployment
+    if active_deployment_id != regional_deployment.deployment_id:
+        print(f'The API service active deployment ({active_deployment_id}) is different from this instance deployment ({regional_deployment.deployment_id}), likely because a new deployment is in progress. Skip scaling on this instance.')
+        return False
+
+
 def scale_app():
-    global last_scale_event
-    if last_scale_event:
-        if datetime.datetime.now() - last_scale_event < datetime.timedelta(minutes=5):
-            print('We scaled the service recently, avoid to scale again')
-            return
-    
-    print('Checking if we need to scale the service...')
-
-    # Connect to RabbitMQ, and get the number of tasks in the default "celery" queue used to process tasks.
-    credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASSWORD)
-    connection = pika.BlockingConnection(pika.ConnectionParameters(RABBITMQ_HOST, credentials=credentials))
-    channel = connection.channel()
-    queue = channel.queue_declare(queue='celery', passive=True)
-    ready_tasks = queue.method.message_count
-
-    # Let's assume we want to have maximum 50 tasks in the queue per worker, with a minimum of 1 worker
-    expected_count = max(math.ceil(ready_tasks / 10), 1)
-    print(f'>> Queue has {ready_tasks} tasks, expected workers count: {expected_count}')
-
     # Perform the scaling if needed
     configuration = Configuration(
         host="https://app.koyeb.com",
@@ -57,6 +47,28 @@ def scale_app():
     )
 
     with ApiClient(configuration) as api_client:
+        global last_scale_event
+        if last_scale_event:
+            if datetime.datetime.now() - last_scale_event < datetime.timedelta(minutes=5):
+                print('We scaled the service recently, avoid to scale again')
+                return
+
+        print('Checking if we need to scale the service...')
+
+        if not is_active_deployment():
+            return
+
+        # Connect to RabbitMQ, and get the number of tasks in the default "celery" queue used to process tasks.
+        credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASSWORD)
+        connection = pika.BlockingConnection(pika.ConnectionParameters(RABBITMQ_HOST, credentials=credentials))
+        channel = connection.channel()
+        queue = channel.queue_declare(queue='celery', passive=True)
+        ready_tasks = queue.method.message_count
+
+        # Let's assume we want to have maximum 20 tasks in the queue per worker, with a minimum of 1 worker
+        expected_count = max(math.ceil(ready_tasks / 20), 1)
+        print(f'>> Queue has {ready_tasks} tasks, expected workers count: {expected_count}')
+
         # Retrieve Koyeb application
         apps = AppsApi(api_client).list_apps(name=KOYEB_WORKER_APP).apps
         if len(apps) != 1:
@@ -66,12 +78,6 @@ def scale_app():
         services = ServicesApi(api_client).list_services(app_id=apps[0].id, name=KOYEB_WORKER_SERVICE).services
         if len(services) != 1:
             raise ValueError(f'Expected 1 service with name {KOYEB_WORKER_SERVICE}, got {len(services)}')
-
-        active_deployment_id = services[0].active_deployment_id
-        regional_deployment = RegionalDeploymentsApi(api_client).get_regional_deployment(id=REGIONAL_DEPLOYMENT_ID).regional_deployment
-        if active_deployment_id != regional_deployment.deployment_id:
-            print(f'The service active deployment ({active_deployment_id}) is different from this instance deployment ({regional_deployment.deployment_id}), likely because a new deployment is in progress, skipping scaling')
-            return
 
         # Get the current deployment
         latest_deployment_id = services[0].latest_deployment_id
@@ -88,9 +94,12 @@ def scale_app():
             new_count = current_count - 1
             print(f'Scaling down service from {current_count} to {new_count} instances')
         else:
-            # Limit the scaling to 5 instances
-            new_count = min(expected_count, 5)
-            print(f'Scaling up service from {current_count} to {new_count} instances')
+            if expected_count > 5:
+                print(f'Scaling up service from {current_count} to 5 instances (capped at 5 instances)')
+                new_count = 5
+            else:
+                print(f'Scaling up service from {current_count} to {expected_count} instances')
+                new_count = expected_count
 
         for idx, _ in enumerate(deployment.definition.scalings):
             deployment.definition.scalings[idx].min = new_count
