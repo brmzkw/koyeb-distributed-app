@@ -21,7 +21,7 @@ KOYEB_WORKER_APP = os.getenv('KOYEB_WORKER_APP', 'dapp-worker')
 KOYEB_WORKER_SERVICE = os.getenv('KOYEB_WORKER_SERVICE', 'worker')
 
 # Given by the Koyeb platform
-REGIONAL_DEPLOYMENT_ID = os.getenv('REGIONAL_DEPLOYMENT_ID', '')
+REGIONAL_DEPLOYMENT_ID = os.getenv('KOYEB_REGIONAL_DEPLOYMENT_ID', '')
 
 last_scale_event = None
 
