@@ -36,7 +36,7 @@ def is_active_deployment(api_client):
 
 
 def scale_app():
-    # Perform the scaling if needed
+    """Scale the service based on the number of tasks in the queue, if needed."""
     configuration = Configuration(
         host="https://app.koyeb.com",
         api_key={
@@ -50,7 +50,7 @@ def scale_app():
     with ApiClient(configuration) as api_client:
         global last_scale_event
         if last_scale_event:
-            if datetime.datetime.now() - last_scale_event < datetime.timedelta(minutes=5):
+            if datetime.datetime.now() - last_scale_event < datetime.timedelta(minutes=2):
                 print('We scaled the service recently, avoid to scale again')
                 return
 
@@ -106,6 +106,7 @@ def scale_app():
             deployment.definition.scalings[idx].min = new_count
             deployment.definition.scalings[idx].max = new_count
 
+        # Perform the service update with the new count
         update_body = UpdateService(definition=deployment.definition, skip_build=True)
         ServicesApi(api_client=api_client).update_service(
             id=services[0].id,
