@@ -8,7 +8,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
 import pika
 
-from sdk.openapi_client import ApiClient, Configuration, ServicesApi, AppsApi, DeploymentsApi, UpdateService
+from sdk.openapi_client import ApiClient, Configuration, ServicesApi, AppsApi, DeploymentsApi, RegionalDeploymentsApi, UpdateService
 
 from worker import process_file, RABBITMQ_PASSWORD, RABBITMQ_USER, RABBITMQ_HOST
 
@@ -19,6 +19,9 @@ flask_app = Flask(__name__)
 KOYEB_API_KEY = os.environ.get('KOYEB_API_KEY')
 KOYEB_WORKER_APP = os.getenv('KOYEB_WORKER_APP', 'dapp-worker')
 KOYEB_WORKER_SERVICE = os.getenv('KOYEB_WORKER_SERVICE', 'worker')
+
+# Given by the Koyeb platform
+REGIONAL_DEPLOYMENT_ID = os.getenv('REGIONAL_DEPLOYMENT_ID', '')
 
 last_scale_event = None
 
@@ -63,6 +66,12 @@ def scale_app():
         services = ServicesApi(api_client).list_services(app_id=apps[0].id, name=KOYEB_WORKER_SERVICE).services
         if len(services) != 1:
             raise ValueError(f'Expected 1 service with name {KOYEB_WORKER_SERVICE}, got {len(services)}')
+
+        active_deployment_id = services[0].active_deployment_id
+        regional_deployment = RegionalDeploymentsApi(api_client).get_regional_deployment(id=REGIONAL_DEPLOYMENT_ID).regional_deployment
+        if active_deployment_id != regional_deployment.deployment_id:
+            print(f'The service active deployment ({active_deployment_id}) is different from this instance deployment ({regional_deployment.deployment_id}), likely because a new deployment is in progress, skipping scaling')
+            return
 
         # Get the current deployment
         latest_deployment_id = services[0].latest_deployment_id
