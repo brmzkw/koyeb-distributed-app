@@ -50,7 +50,7 @@ def scale_app():
     with ApiClient(configuration) as api_client:
         global last_scale_event
         if last_scale_event:
-            if datetime.datetime.now() - last_scale_event < datetime.timedelta(minutes=2):
+            if datetime.datetime.now() - last_scale_event < datetime.timedelta(minutes=5):
                 print('We scaled the service recently, avoid to scale again')
                 return
 
